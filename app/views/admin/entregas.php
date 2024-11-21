@@ -6,8 +6,8 @@
     </div>
     <div class="table-container">
         <div class="table-header">
-        <form class="form-s" action="/orders">
-            <input type="search" placeholder="Buscar pelo código da compra" name="search" id="search" />
+        <form class="form-s" action="/ships">
+            <input type="search" placeholder="Buscar pela data da entrega" name="search" id="search" />
             <button type="submit"><i class="fa fa-search"></i></button>
         </form>
         </div>

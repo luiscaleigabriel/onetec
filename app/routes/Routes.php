@@ -22,6 +22,7 @@ class Routes
                 '/resetpass' => 'UserController@resetpass',
                 '/dash' => 'DashController@index',
                 '/orders' => 'DashController@show',
+                '/ships' => 'ShipController@show',
                 '/categories' => 'CategoryController@show', // Categorias
                 '/newcategory' => 'CategoryController@create',
                 '/editcategory' => 'CategoryController@edit',

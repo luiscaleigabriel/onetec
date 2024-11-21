@@ -20,7 +20,7 @@
             </li>
           <?php endif; ?>
           <li class="list-item">
-            <a href="/chipi"><i class="fas fa-truck"></i> Entregas</a>
+            <a href="/ships"><i class="fas fa-truck"></i> Entregas</a>
           </li>
           <?php if(isset($_SESSION['admin'])): ?>
             <li class="list-item">

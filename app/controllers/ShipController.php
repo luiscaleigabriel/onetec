@@ -40,7 +40,7 @@ class ShipController extends Controller
             $user = new User;
             $users = $user->all();
 
-            $this->view('admin/orders', ['orders' => $orders, 'users' => $users,'pagination' => $pagination]);
+            $this->view('admin/entregas', ['orders' => $orders, 'users' => $users,'pagination' => $pagination]);
         }else {
             redirect('/');
         }
