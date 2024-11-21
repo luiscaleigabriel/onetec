@@ -27,5 +27,7 @@
   </main>
 
   <script src="assets/js/dash.js"></script>
+  <?= $this->section('js'); ?>
+  
 </body>
 </html>

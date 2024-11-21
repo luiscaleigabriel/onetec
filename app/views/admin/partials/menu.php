@@ -2,7 +2,7 @@
     <span id="toggle"><i class="fa-solid fa-bars"></i></span>
     <div onclick="showMenu()" id="menu-data--user" class="menu-data--user">
         <div class="user-data">
-            <span class="user-image"><img src="<?= $_SESSION['auth']->image ? '' : 'assets/images/user/user.png' ?>" alt="user" /></span>
+            <span class="user-image"><img src="<?= !empty($_SESSION['auth']->image) ? $_SESSION['auth']->image : 'assets/images/user/user.png' ?>" alt="user" /></span>
             <span class="user-name"><?= $_SESSION['auth']->name ?></span>
         </div>
     </div>

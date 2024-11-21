@@ -31,7 +31,7 @@
         </div>
         <div class="form-group">
           <label for="telefone">Nº de Telefone <span>*</span></label>
-          <input value="<?= $user->telefone ?>" type="number" name="telefone" id="telefone" />
+          <input value="<?= $user->telefone ?>" type="text" name="telefone" id="telefone" />
         </div>
         <div class="form-group">
           <label for="email">Email <span>*</span></label>
@@ -69,5 +69,20 @@
     document.addEventListener('DOMContentLoaded', () => {
       showInCheckout();
     });
+
+  // Máscara para telefone
+  document.getElementById('telefone').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 12) value = value.slice(0, 12);
+    
+    if (value.length > 0) {
+        value = '(+244) ' + value.slice(3);
+    }
+    if (value.length > 9) {
+        value = value.slice(0,9) + value.slice(9);
+    }
+    
+    e.target.value = value;
+  });
 </script>
 <?php $this->stop(); ?>

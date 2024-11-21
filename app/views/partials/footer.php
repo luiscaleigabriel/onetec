@@ -16,20 +16,24 @@
       <div class="div">
         <h2>Conta</h2>
         <ul class="list">
+          <?php if(isset($_SESSION['auth'])): ?>
+            <li class="list-item">
+              <a href="/count">Minha Conta</a>
+            </li>
+          <?php endif; ?>
+          <?php if(!isset($_SESSION['auth'])): ?>
+            <li class="list-item">
+              <a href="/register">Cadastro</a>
+            </li>
+            <li class="list-item">
+              <a href="/login">Login</a>
+            </li>
+          <?php endif; ?>
           <li class="list-item">
-            <a href="count.html">Minha Conta</a>
+            <a href="/cart">Carrinho de Compras</a>
           </li>
           <li class="list-item">
-            <a href="login.html">Login/Cadastro</a>
-          </li>
-          <li class="list-item">
-            <a href="cart.html">Carrinho de Compras</a>
-          </li>
-          <li class="list-item">
-            <a href="#">Lista de Favoritos</a>
-          </li>
-          <li class="list-item">
-            <a href="shop.html">Loja</a>
+            <a href="/like">Lista de Favoritos</a>
           </li>
         </ul>
       </div>
@@ -37,13 +41,13 @@
         <h2>Links Importante</h2>
         <ul class="list">
           <li class="list-item">
-            <a href="about.html">Púlica & Privacidade</a>
+            <a href="/about">Púlica & Privacidade</a>
           </li>
           <li class="list-item">
-            <a href="about.html">Termos de Uso</a>
+            <a href="/about">Termos de Uso</a>
           </li>
           <li class="list-item">
-            <a href="contact.html">Contactos</a>
+            <a href="/contact">Contactos</a>
           </li>
         </ul>
       </div>

@@ -660,3 +660,11 @@ footer {
   border-radius: 20px;
   background-color: var(--bs-form-valid-color);
 }
+
+.statusErr {
+  color: var(--bs-black);
+  font-size: .8rem;
+  padding: .2rem;
+  border-radius: 20px;
+  background-color: var(--bs-blue);
+}

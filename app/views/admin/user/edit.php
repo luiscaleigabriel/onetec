@@ -33,7 +33,7 @@
         <div class="form-group-group">
             <div class="form-group">
                 <label for="telefone">Telefone</label>
-                <input value="<?= $user->telefone ?>" class="<?= (isset($_SESSION['telefone'])) ? 'validation-error' : '';  ?>" type="number" name="telefone" id="telefone" placeholder="Nº de Telefone" />
+                <input value="<?= $user->telefone ?>" class="<?= (isset($_SESSION['telefone'])) ? 'validation-error' : '';  ?>" type="text" name="telefone" id="telefone" placeholder="Nº de Telefone" />
                 <?= (isset($_SESSION['telefone'])) ? "<span class='validation-error'>{$_SESSION['telefone']}</span>" : '';  ?>
             </div>
             <div class="form-group">
@@ -58,7 +58,7 @@
             <label id="label" class="file-input" for="image">
                 <div id="drop-zone" class="drop-zone">
                     <p>
-                        <b>Selecione a imagem do produto</b> ou solte aqui.
+                        <b>Selecione a imagem do usuário</b> ou solte aqui.
                     </p>
                     <img id="cover" src="<?= $user->imagem ?>" alt="produc" />
                 </div>
@@ -79,3 +79,22 @@
     unset($_SESSION['image']);
 ?>
 <?= $this->stop(); ?>
+
+<?php $this->start('js'); ?>
+<script>
+// Máscara para telefone
+document.getElementById('telefone').addEventListener('input', function (e) {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length > 12) value = value.slice(0, 12);
+    
+    if (value.length > 0) {
+        value = '(+244) ' + value.slice(3);
+    }
+    if (value.length > 9) {
+        value = value.slice(0,9) + value.slice(9);
+    }
+    
+    e.target.value = value;
+});
+</script>
+<?php $this->stop(); ?>
