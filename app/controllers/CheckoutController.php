@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\core\Request;
 use app\database\models\Order;
 use app\database\models\Product;
+use app\database\models\Ship;
 use app\database\models\User;
 use app\support\Auth;
 use app\support\Flash;
@@ -46,7 +47,6 @@ class CheckoutController extends Controller
         $cardExpiryYear = Request::input('card-expiry-year'); 
         $total = Request::input('total');
 
-        $m = date('m') + 1;
         if($cardExpiryYear > date('Y')) {
             if($cardNumber == '424242424242') {
                 $product = Request::input('data');
@@ -78,6 +78,10 @@ class CheckoutController extends Controller
                 $order = new Order;
                 $created = $order->create($data);
 
+                $ship = new Ship;
+                $shipData = ['status' => false]; 
+                $ship = $ship->create($shipData);
+
                 if($created) {
                     Flash::set('success', 'Compra realizada com sucesso!');
                     redirect('/myorders');
@@ -86,7 +90,7 @@ class CheckoutController extends Controller
                     redirect('/myorders');
                 }
         
-            }else if($cardNumber == '555555554444')  {
+            }else if($cardNumber == '555555555555')  {
                 if($total <= 100000 && $total != 0) {
                     $product = Request::input('data');
                     $products = explode('-', $product);
@@ -116,6 +120,10 @@ class CheckoutController extends Controller
             
                     $order = new Order;
                     $created = $order->create($data);
+
+                    $ship = new Ship;
+                    $shipData = ['status' => false]; 
+                    $ship = $ship->create($shipData);
     
                     if($created) {
                         Flash::set('success', 'Compra realizada com sucesso!');

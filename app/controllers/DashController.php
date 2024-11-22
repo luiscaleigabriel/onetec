@@ -28,6 +28,8 @@ class DashController extends Controller
             $users = count($user->all());
 
             $this->view('admin/dash', ['orders' => $orders, 'users' => $users, 'total' => $total, 'ganhos' => $ganhos]);
+        }else if(Auth::isEnt()) {
+            redirect('/ships');
         }else {
             redirect('/');
         }

@@ -12,7 +12,7 @@ class ShipController extends Controller
 {
     public function show() 
     {
-        if (Auth::isAdmin()) {
+        if (Auth::isAdmin() || Auth::isEnt()) {
             
             if(array_key_exists('search', $_GET)) {
                 $search = strip_tags($_GET['search']);
@@ -45,4 +45,6 @@ class ShipController extends Controller
             redirect('/');
         }
     }
+
+
 }

@@ -25,14 +25,14 @@
                 <?php foreach($orders as $order): ?>
                     <tr>
                         <td><?= $order->id ?></td>
-                        <td><?= $order->data_da_entrega	 ?></td>
                         <td>
                             <?php if($order->status == true): ?>
                                 <span class="status">Finalizado</span>
                             <?php else: ?>
-                                <span class="statusErr">Entrega em curso</span>
+                                <span class="statusErr">A ser entregue</span>
                             <?php endif; ?>
                         </td>
+                        <td><?= $order->data_da_entrega	 ?></td>
                         <td>
                             <?php foreach($users as $user): ?>
                                 <?php if($order->identregador == $user->id): ?>
