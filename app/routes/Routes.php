@@ -45,6 +45,7 @@ class Routes
                 '/resetpass' => 'UserController@reset',
                 '/pay' => 'CheckoutController@pay',
                 '/paypay' => 'CheckoutController@finish',
+                '/shiping' => 'ShipController@shiping',
                 '/new/category' => 'CategoryController@store', // Categorias
                 '/update/category/[0-9]+' => 'CategoryController@update',
                 '/delete/category/[0-9]+' => 'CategoryController@delete',

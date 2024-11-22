@@ -7,9 +7,11 @@
         </div>
     </div>
     <ul id="nav-drop">
+        <?php if($_SESSION['auth']->access == 'admin'): ?>
         <li>
             <a href="/edituser?id=<?= $_SESSION['auth']->id ?>">Perfil <i class="fa fa-user"></i></a> 
         </li>
+        <?php endif; ?>
         <li>
             <a href="/resetpassword">Alterar Senha <i class="fa fa-key"></i></a> 
         </li>

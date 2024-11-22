@@ -23,6 +23,8 @@ class Auth
             if ($user->admin) {
                 Session::set('admin', true);
                 redirect('/dash');
+            }else if($user->acesso == 'entregador' ) {
+                redirect('/dash');
             }else {
                 redirect('/checkout');
             }

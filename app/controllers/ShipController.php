@@ -2,11 +2,13 @@
 
 namespace app\controllers;
 
+use app\core\Request;
 use app\database\Filters;
 use app\database\models\Ship;
 use app\database\models\User;
 use app\database\Pagination;
 use app\support\Auth;
+use app\support\Flash;
 
 class ShipController extends Controller 
 {
@@ -46,5 +48,25 @@ class ShipController extends Controller
         }
     }
 
+    public function shiping() 
+    {
+        $id = Request::input('identrega');
 
+        $data = [
+            'identregador' => $id,
+            'data_da_entrega' => date('Y-m-d H:m:s'),
+            'status' => true
+        ];
+
+        $ship = new Ship;
+        $updated = $ship->update('id', $id, $data);
+
+        if($updated) {
+            Flash::set('success', "Entrega finalizada com sucesso!");
+            back();
+        }else {
+            Flash::set('error', "Ocorreu um erro verifique a sua conexão com a internet!");
+            back();
+        }
+    }
 }

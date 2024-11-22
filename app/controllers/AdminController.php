@@ -176,7 +176,7 @@ class AdminController extends Controller
 
     public function reset() 
     {
-        if(Auth::isAdmin()) {
+        if(Auth::isAdmin() || Auth::isEnt()) {
             $this->view('admin/user/resetpass');
         }else {
             redirect('/');

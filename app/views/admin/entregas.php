@@ -1,9 +1,22 @@
-<?php $this->layout('admin/dash_master') ?>
+<?php
+
+use app\support\Auth;
+
+ $this->layout('admin/dash_master') ?>
 
 <?= $this->start('main'); ?>
     <div class="title-about">
         <h2 class="dash-title">Todas as Entregas</h2>
     </div>
+    <?php
+        if (isset($_SESSION['error'])) {
+            echo flash('error', 'error');
+        }
+
+        if (isset($_SESSION['success'])) {
+            echo flash('success', 'success');
+        }
+    ?>
     <div class="table-container">
         <div class="table-header">
         <form class="form-s" action="/ships">
@@ -18,6 +31,9 @@
                 <th>Data da entrega</th>
                 <th>Status</th>
                 <th>Entregador</th>
+                <?php if(Auth::isEnt()): ?>
+                    <th>Ação</th>
+                <?php endif; ?>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +56,14 @@
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </td>
+                        <?php if(Auth::isEnt() && $order->status == false): ?>
+                            <td>
+                                <form action="/shiping" method="post">
+                                    <input type="hidden" name="identrega" value="<?= $_SESSION['auth']->id ?>" />
+                                    <button style="background-color: black;" type="submit" class="btn btn-primary-p">Finalizar Entrega</button>
+                                </form>
+                            </td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
