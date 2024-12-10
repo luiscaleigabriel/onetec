@@ -59,7 +59,7 @@ use app\support\Auth;
                         <?php if(Auth::isEnt() && $order->status == false): ?>
                             <td>
                                 <form action="/shiping" method="post">
-                                    <input type="hidden" name="identrega" value="<?= $_SESSION['auth']->id ?>" />
+                                    <input type="hidden" name="identrega" value="<?= $order->id ?>" />
                                     <button style="background-color: black;" type="submit" class="btn btn-primary-p">Finalizar Entrega</button>
                                 </form>
                             </td>

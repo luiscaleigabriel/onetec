@@ -50,12 +50,12 @@ class ShipController extends Controller
 
     public function shiping() 
     {
-        $id = Request::input('identrega');
+        $id = (int) Request::input('identrega');
 
         $data = [
-            'identregador' => $id,
             'data_da_entrega' => date('Y-m-d H:m:s'),
-            'status' => true
+            'status' => true,
+            'identregador' => $_SESSION['auth']->id
         ];
 
         $ship = new Ship;
