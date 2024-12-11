@@ -13,6 +13,7 @@ class Auth
             $stdClass = new stdClass;
             $stdClass->id = $user->id;
             $stdClass->name = $user->nome;
+            $stdClass->email = $user->email;
             $stdClass->image = $user->imagem;
             $stdClass->access = $user->acesso;
 
