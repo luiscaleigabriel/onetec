@@ -74,11 +74,18 @@ class UserController extends Controller
             $filters = new Filters;
             $filters->where('idusuario', '=', $_SESSION['auth']->id);
 
+            $filter = new Filters;
+            $filter->orderBy('id', 'desc');
+
             $order = new Order;
             $order->setFilters($filters);
             $orders = $order->all();
 
-            $this->view('orders', ['orders' => $orders]);
+            $newOrder = new Order;
+            $newOrder->setFilters($filter);
+            $new = $newOrder->first();
+
+            $this->view('orders', ['orders' => $orders, 'new' => $new]);
         }else {
             redirect('/');
         }
