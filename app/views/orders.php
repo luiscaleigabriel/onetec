@@ -58,23 +58,38 @@
 <?php if(!isset($_SESSION['success'])): ?>
   <?php $this->start('js'); ?>
     <script>
-      // Enviar dados do localStorage para o servidor PHP 
+      // Enviar dados do localStorage para a rota PHP 
       function enviarDados() { 
         const produtosSalvos = JSON.parse(localStorage.getItem('cart')); 
-        // Enviar os dados via POST para o servidor 
+        // Enviar os dados via POST para a rota 
         fetch('/pdf', { 
-          method: 'POST', headers: { 'Content-Type': 'application/json' }, 
-          body: JSON.stringify(produtosSalvos) }) 
-          .then(response => response.blob()) 
-          .then(blob => { const url = window.URL.createObjectURL(blob); 
-          
+          method: 'POST', 
+          headers: { 
+            'Content-Type': 'application/json',
+            }, 
+            body: JSON.stringify({
+              produtos: produtosSalvos 
+            }) 
+          })
+          .then(response => { 
+            if (!response.ok) { 
+              throw new Error('Erro na geração do PDF'); 
+            } 
+            return response.blob(); 
+          })
+          .then(blob => { 
+            const url = window.URL.createObjectURL(blob); 
             const a = document.createElement('a'); 
-            a.href = url; a.download = 'recibo.pdf'; 
+            a.href = url; 
+            a.download = 'recibo.pdf'; 
             document.body.appendChild(a); 
             a.click(); 
             a.remove(); 
-          });
-      }
+          })
+          .catch(error => { 
+            console.error('Erro:', error); 
+          }); 
+        }
     </script>
   <?php $this->stop(); ?>
 

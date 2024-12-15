@@ -2,8 +2,49 @@
 
 namespace app\controllers;
 
+use app\core\Request;
+use TCPDF;
+
 class ReciboController 
 {
+
+    public function index() 
+    {
+        // Capturar os dados do request 
+        $produtos = $request->input('produtos'); 
+        // Criar uma nova instância do TCPDF 
+        $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false); 
+        // Configurações do Documento 
+        $pdf->SetCreator(PDF_CREATOR); 
+        $pdf->SetAuthor('OneTec'); 
+        $pdf->SetTitle('Recibo de Compra'); 
+        $pdf->SetSubject('Recibo'); 
+        $pdf->SetKeywords('TCPDF, PDF, recibo, compra, OneTec'); 
+        // Configurações da Página 
+        $pdf->setPrintHeader(false); 
+        $pdf->setPrintFooter(false); 
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT); 
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM); 
+        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO); 
+        // Adicionar uma página 
+        $pdf->AddPage(); 
+        // Conteúdo do PDF 
+        $html = ' <h1>OneTec - Recibo de Compra</h1> 
+        <table border="1" cellpadding="5"> <thead> <tr> <th>Produto</th> <th>Quantidade</th> <th>Preço Unit.</th> <th>Total</th> </tr> </thead> <tbody>'; $total = 0; 
+        
+        foreach ($produtos as $produto) { 
+            $subtotal = $produto['quantity'] * $produto['price']; 
+            $total += $subtotal; $html .= ' <tr> <td>' . $produto['name'] . '</td> <td>' . $produto['quantity'] . '</td> <td>' . $produto['price'] . ' Kz</td> <td>' . number_format($subtotal, 2) . ' Kz</td> </tr>'; 
+        } 
+        $entrega = ($total >= 80000) ? 'Grátis' : 2000; 
+        $totalFinal = ($total >= 80000) ? $total : $total + 2000; 
+        $html .= ' </tbody> </table> <br> <div class="total"> <p>Subtotal: ' . number_format($total, 2) . ' Kz</p> <p>Entrega: ' . $entrega . '</p> <p>Total: ' . number_format($totalFinal, 2) . ' Kz</p> </div> <p>Obrigado por comprar na OneTec!</p>'; 
+        
+        // Adicionar o conteúdo HTML ao PDF 
+        $pdf->writeHTML($html, true, false, true, false, ''); // Fechar e gerar o PDF 
+        $pdf->Output('recibo.pdf', 'D'); // 'D' para download direto 
+    }
+
     public function gerar() 
     {
         /**

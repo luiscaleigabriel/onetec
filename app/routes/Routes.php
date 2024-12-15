@@ -39,6 +39,7 @@ class Routes
                 '/productdetails' => 'ProductController@details'
             ],
             'post' => [
+                '/pdf' => 'ReciboController@index',
                 '/auth' => 'LoginController@store',
                 '/acount' => 'UserController@update',
                 '/register' => 'RegisterController@store',
